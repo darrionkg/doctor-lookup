@@ -22,7 +22,7 @@ $(document).ready(function() {
     console.log(API_KEY);
     let promise = new Promise(function(resolve, reject) {
       let request = new XMLHttpRequest();
-      let url = 'https://api.betterdoctor.com/2016-03-01/doctors?name=bob&location=45.5155%2C%20-122.6793%2C%20100&user_location=45.5155%2C%20-122.6793&skip=0&limit=10&user_key=' + API_KEY;
+      let url = `https://api.betterdoctor.com/2016-03-01/doctors?location=or-portland&user_location=45.520%2C-122.677&skip=0&limit=10&user_key=${API_KEY}`;
       request.onload = function() {
         if (this.status === 200) {
           resolve(request.response);
