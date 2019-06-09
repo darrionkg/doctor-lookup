@@ -6,12 +6,15 @@ export class DoctorFinder {
 
   addToOptions(userOption, optionType) {
     let options = "";
+    console.log(optionType);
+    console.log(userOption);
     if(userOption != null && optionType == "doctors") {
       options += "doctors?name=" + userOption + "&";
     }
     else if(userOption != null && optionType == "practices") {
-      options += "practices?name=" + userOption + "&";
+      options += "doctors?query=" + userOption + "&";
     }
+    console.log(options);
     return options;
   }
 
