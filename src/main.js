@@ -3,10 +3,20 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/styles.css';
 import { DoctorFinder } from './functions';
 
-function getDoctorInfo(body, option) {
+
+function checkIfDoctorsExist(body, option) {
+  if(body.data.length >= 1) {
+    getDoctorInfo(body);
+  }
+  else {
+    $("#result").text(`Sorry, no doctors were found with the search ${option}`)
+  }
+}
+
+function getDoctorInfo(body) {
   // not sure why loop currently wont work
   body.data.forEach(function(item) {
-    $('#result').text(`The doctors with the name ${option} include... First Name: ${item.profile.first_name} Last name: ${item.profile.last_name} Address: ${item.practices[0].visit_address["street"]}. ${item.practices[0].visit_address["city"]}, ${item.practices[0].visit_address["state"]} Phone Number: ${item.practices[0].phones[0].number} Accepting New Patients: ${item.practices[0].accepts_new_patients} <a href="${item.profile["image_url"]}"> Pic Of Me</a> `);
+    $('#doctorTable').append(`<tr> <td>${item.profile.first_name}</td> <td>${item.profile.last_name}</td> <td>${item.practices[0].visit_address["street"]}. ${item.practices[0].visit_address["city"]}, ${item.practices[0].visit_address["state"]}</td> <td>${item.practices[0].phones[0].number}</td> <td>${item.practices[0].accepts_new_patients}</td> <td><a href="${item.profile["image_url"]}"> Pic Of Me</a></td> </tr>`);
   });
 }
 
@@ -23,8 +33,8 @@ $(document).ready(function() {
     promise.then(function(response) {
       let body = JSON.parse(response);
       // haven't refactored yet for doctor practices. still working on by name
-      getDoctorInfo(body, option);
-      //$("#result").text(`Sorry, no doctors have the name ${option} in your area.`);
+      checkIfDoctorsExist(body, option);
+ 
     }, function(error) {
       $("#errorMessage").text(`There was an error processing your request: ${error.message}`);
     });
@@ -40,10 +50,10 @@ $(document).ready(function() {
 
     promise.then(function(response) {
       let body = JSON.parse(response);
-      getDoctorInfo(body, option);
-      $('#result').text(`The doctors that practice ${option} are ${body.data.doctors[0].first_name}`);
+      checkIfDoctorsExist(body, option);
+
     }, function(error) {
-      // $("#result").text(`Sorry, no doctors practice ${option} in your area.`);
+
       $("#errorMessage").text(`There was an error processing your request: ${error.message}`);
     });
   });
