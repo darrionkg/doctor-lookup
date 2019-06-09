@@ -1,3 +1,7 @@
 body {
     background-color: #7FDBFF;
 }
+
+#doctorTable, #doctorTable th, #doctorTable td {
+    border: 1px solid black;
+}
