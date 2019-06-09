@@ -1,18 +1,13 @@
-export class DoctorFinder {
+export class doctorFinder {
 
   constructor() {
 
   }
 
   addToOptions(userOption, optionType) {
-    let options = "";
-    console.log(optionType);
-    console.log(userOption);
-    if(userOption != null && optionType == "doctors") {
-      options += "doctors?name=" + userOption + "&";
-    }
-    else if(userOption != null && optionType == "practices") {
-      options += "doctors?query=" + userOption + "&";
+    let options = "doctors?";
+    if(userOption != null && (optionType == "name" || optionType == "query")) {
+      options += optionType += "=" + userOption + "&";
     }
     console.log(options);
     return options;

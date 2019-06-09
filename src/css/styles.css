@@ -1,7 +1,12 @@
 body {
-    background-color: #7FDBFF;
+  background-color: #7FDBFF;
 }
 
 #doctorTable, #doctorTable th, #doctorTable td {
-    border: 1px solid black;
+  border: 1px solid black;
+}
+
+.container {
+    width: 100%;
+    margin: 0 auto;
 }

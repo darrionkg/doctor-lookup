@@ -5,34 +5,30 @@
     <title>Template</title>
   </head>
   <body>
-    <form id="nameForm">
-      <label for="name">Search Doctor By Name</label>
-      <input id="name" type="text" required></input>
-      <input id="optionType1" type="hidden" value="doctors">
-      <button type="submit" class="btn btn-dark">Search</button>
-    </form>
-    <form id="practiceForm">
-      <label for="practice">Search Doctor By Practice</label>
-      <input id="practice" type="text" required></input>
-      <input id="optionType2" type="hidden" value="practices">
-      <button type="submit" class="btn btn-dark">Search</button>
-    </form>
-    <!-- <button class="btn btn-dark">See All Doctors</button> -->
-    <!-- <table id="doctorList"></table> -->
-    
-    <table id="doctorTable">
-      <tr>
-        <th>Firstname</th>
-        <th>Lastname</th> 
-        <th>Address</th>
-        <th>Phone Number</th>
-        <th>Accepting New Patients</th>
-        <th>Photo Link</th>
-      </tr>
-    </tr>
-  </table>
-  <p id='errorMessage'></p>
-  <p id='result'></p>
-
+    <div class="container">
+      <form id="nameForm">
+        <label for="name">Search Doctor By Name</label>
+        <input id="name" type="text" required></input>
+        <input id="optionType1" type="hidden" value="name">
+        <button type="submit" class="btn btn-dark">Search</button>
+      </form>
+      <form id="queryForm">
+        <label for="query">Search Doctor By query</label>
+        <input id="query" type="text" required></input>
+        <input id="optionType2" type="hidden" value="query">
+        <button type="submit" class="btn btn-dark">Search</button>
+      </form>
+      <table id="doctorTable">
+        <tr>
+          <th>Firstname</th>
+          <th>Lastname</th> 
+          <th>Address</th>
+          <th>Phone Number</th>
+          <th>Accepting New Patients</th>
+          <th>Photo Link</th>
+        </tr>
+      </table>
+      <p id='errorMessage'></p>
+    </div>
   </body>
 </html>

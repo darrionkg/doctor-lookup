@@ -1,7 +1,7 @@
 import $ from 'jquery';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/styles.css';
-import { DoctorFinder } from './functions';
+import { doctorFinder } from './doctorFinder';
 
 
 function checkIfDoctorsExist(body, option) {
@@ -20,41 +20,33 @@ function getDoctorInfo(body) {
   });
 }
 
+function createPromise(option, optionType) {
+  let find = new doctorFinder();
+  let options = find.addToOptions(option, optionType);
+  let promise = find.connectToApi(options);
+  
+  promise.then(function(response) {
+    let body = JSON.parse(response);
+    checkIfDoctorsExist(body, option);
+  }, function(error) {
+    $("#errorMessage").text(`There was an error processing your request: ${error.message}`);
+  });
+}
+
 $(document).ready(function() {
-  let find = new DoctorFinder();
   $("#nameForm").submit(function(event) {
     event.preventDefault();
+    $("#doctorTable td").remove();
     let option = $("#name").val();
     let optionType = $("#optionType1").val();
-    let options = find.addToOptions(option, optionType);
-
-    let promise = find.connectToApi(options);
-
-    promise.then(function(response) {
-      let body = JSON.parse(response);
-      // haven't refactored yet for doctor practices. still working on by name
-      checkIfDoctorsExist(body, option);
- 
-    }, function(error) {
-      $("#errorMessage").text(`There was an error processing your request: ${error.message}`);
-    });
+    createPromise(option, optionType)
   });
 
-  $("#practiceForm").submit(function(event) {
+  $("#queryForm").submit(function(event) {
     event.preventDefault();
-    let option = $("#practice").val();
+    $("#doctorTable td").remove();
+    let option = $("#query").val();
     let optionType = $("#optionType2").val();
-    let options = find.addToOptions(option, optionType);
-
-    let promise = find.connectToApi(options);
-
-    promise.then(function(response) {
-      let body = JSON.parse(response);
-      checkIfDoctorsExist(body, option);
-
-    }, function(error) {
-
-      $("#errorMessage").text(`There was an error processing your request: ${error.message}`);
-    });
+    createPromise(option, optionType);
   });
 });
