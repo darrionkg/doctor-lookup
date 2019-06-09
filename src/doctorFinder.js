@@ -9,7 +9,6 @@ export class doctorFinder {
     if(userOption != null && (optionType == "name" || optionType == "query")) {
       options += optionType += "=" + userOption + "&";
     }
-    console.log(options);
     return options;
   }
 

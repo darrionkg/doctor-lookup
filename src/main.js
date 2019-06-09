@@ -14,7 +14,6 @@ function checkIfDoctorsExist(body, option) {
 }
 
 function getDoctorInfo(body) {
-  // not sure why loop currently wont work
   body.data.forEach(function(item) {
     $('#doctorTable').append(`<tr> <td>${item.profile.first_name}</td> <td>${item.profile.last_name}</td> <td>${item.practices[0].visit_address["street"]}. ${item.practices[0].visit_address["city"]}, ${item.practices[0].visit_address["state"]}</td> <td>${item.practices[0].phones[0].number}</td> <td>${item.practices[0].accepts_new_patients}</td> <td><a href="${item.profile["image_url"]}"> Pic Of Me</a></td> </tr>`);
   });
